@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi ficha — Registro de Egresados</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span>ING.<span class="dot">·</span>INFORMÁTICA</span>
+        <small>UAJMS — Yacuiba</small>
+      </div>
+      <nav>
+        <a href="index.html" data-i18n="nav_dir">Directorio</a>
+        <a href="dashboard.html" class="active" data-i18n="nav_dash">Mi ficha</a>
+        <a href="perfil.html" id="topNavPublicLink" target="_blank">Ver perfil público ↗</a>
+        <a href="login.html" data-i18n="nav_logout">Salir</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="dash">
+    <div class="dash-head">
+      <div class="wrap">
+        <div>
+          <span class="eyebrow" id="dashUserBadge">EGR·2021·014</span>
+          <h1>Mi ficha de egresado</h1>
+          <div class="sub">Completa tus datos — así te verán los visitantes del directorio.</div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button type="button" class="btn btn-outline" id="btnTogglePreview" data-tooltip="Abrir vista previa en vivo de tu perfil">
+            👁️ Vista previa en vivo
+          </button>
+          <a href="perfil.html" id="btnPublicProfile" class="btn btn-amber" target="_blank" data-tooltip="Abrir perfil en nueva pestaña">
+            Ver ficha pública ↗
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-body">
+      <div class="wrap">
+        <!-- Panel de Estadísticas Globales Admin -->
+        <div id="adminGlobalStats"></div>
+
+        <div class="dash-grid">
+          <div>
+            <form id="dashForm">
+              <!-- Foto de Perfil -->
+              <div class="panel">
+                <h3>Foto de perfil</h3>
+                <div class="panel-sub">Sube una imagen para mostrar en tu ficha pública</div>
+                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                  <div class="photo-preview" id="photoPreview"
+                    style="width: 100px; height: 100px; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center;">
+                    <span id="photoPlaceholder" style="font-family: var(--f-display); font-size: 2rem; color: white;">CR</span>
+                    <img id="photoImg" src="" alt="Foto de perfil" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                  </div>
+                  <div>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                    <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('photoInput').click()">
+                      📷 Subir foto
+                    </button>
+                    <button type="button" class="btn btn-outline btn-sm" id="removePhotoBtn" style="margin-left: 8px;">
+                      🗑 Quitar
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Datos Personales -->
+              <div class="panel">
+                <h3>Datos personales</h3>
+                <div class="panel-sub">Información básica de presentación</div>
+                <div class="row-2">
+                  <div class="field">
+                    <label for="d-nombres">Nombres</label>
+                    <input type="text" id="d-nombres" value="Camila">
+                  </div>
+                  <div class="field">
+                    <label for="d-apellidos">Apellidos</label>
+                    <input type="text" id="d-apellidos" value="Rojas Terán">
+                  </div>
+                </div>
+                <div class="row-2">
+                  <div class="field">
+                    <label for="d-rol">Rol / cargo actual</label>
+                    <input type="text" id="d-rol" value="Backend Developer">
+                  </div>
+                  <div class="field">
+                    <label for="d-anio">Año de egreso</label>
+                    <input type="text" id="d-anio" value="2021">
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="d-bio">Resumen profesional</label>
+                  <textarea id="d-bio" rows="3">Desarrolladora backend enfocada en sistemas distribuidos y APIs de alto tráfico. Egresada de la promoción 2021, actualmente trabaja en el sector fintech.</textarea>
+                  <div class="field-hint">2–3 líneas. Esto aparece como presentación en tu ficha pública.</div>
+                </div>
+              </div>
+
+              <!-- Lenguajes y Tecnologías -->
+              <div class="panel">
+                <h3>Lenguajes y tecnologías</h3>
+                <div class="panel-sub">Presiona Enter o coma para agregar cada tecnología</div>
+                <div class="chip-input" id="chipInput">
+                  <div class="chips"></div>
+                  <input type="text" placeholder="Agregar lenguaje (ej. Go, Docker)…">
+                </div>
+              </div>
+
+              <!-- Habilidades Blandas -->
+              <div class="panel">
+                <h3>Habilidades Blandas</h3>
+                <div class="panel-sub">Presiona Enter o coma para agregar competencias personales</div>
+                <div class="chip-input" id="softChipInput">
+                  <div class="chips"></div>
+                  <input type="text" placeholder="Agregar habilidad (ej. Liderazgo, Trabajo en equipo)…">
+                </div>
+              </div>
+
+              <!-- Proyectos Destacados -->
+              <div class="panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <div>
+                    <h3>Proyectos destacados</h3>
+                    <div class="panel-sub" style="margin-bottom: 0;">Muestra el código o aplicaciones que has construido</div>
+                  </div>
+                  <button type="button" class="btn btn-outline btn-sm" id="btnAddProject">+ Agregar proyecto</button>
+                </div>
+                <div id="projectsRepeater"></div>
+              </div>
+
+              <!-- Experiencia Laboral -->
+              <div class="panel">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <div>
+                    <h3>Experiencia Laboral / Prácticas</h3>
+                    <div class="panel-sub" style="margin-bottom: 0;">Cargos desempeñados o proyectos de extensión</div>
+                  </div>
+                  <button type="button" class="btn btn-outline btn-sm" id="btnAddExp">+ Agregar experiencia</button>
+                </div>
+                <div id="expRepeater"></div>
+              </div>
+
+              <!-- Enlaces & Redes -->
+              <div class="panel">
+                <h3>Enlaces y Contacto</h3>
+                <div class="panel-sub">Tu portafolio vive donde ya lo tienes — solo enlázalo</div>
+                <div class="link-row">
+                  <div class="icon">GH</div>
+                  <input type="text" id="d-github" placeholder="github.com/tu-usuario" value="github.com/camrojas">
+                </div>
+                <div class="link-row">
+                  <div class="icon">IN</div>
+                  <input type="text" id="d-linkedin" placeholder="linkedin.com/in/tu-usuario" value="linkedin.com/in/camila-rojas">
+                </div>
+                <div class="link-row">
+                  <div class="icon">✉</div>
+                  <input type="text" id="d-correo" placeholder="tucorreo@ejemplo.com" value="camila.rojas@ejemplo.com">
+                </div>
+                <div class="link-row">
+                  <div class="icon">↗</div>
+                  <input type="text" id="d-portfolio" placeholder="Portafolio externo (ej. camilarojas.dev)" value="camilarojas.dev">
+                </div>
+              </div>
+
+              <div class="panel-actions">
+                <span style="font-family: var(--f-mono); font-size: 0.75rem; color: var(--text-muted); align-self: center; margin-right: auto;">
+                  💡 Atajo: presiona <b>Ctrl + S</b> para guardar rápido
+                </span>
+                <button type="button" class="btn btn-outline" onclick="window.location.reload()">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Sidebar Informativo -->
+          <div>
+            <div class="side-card">
+              <span class="eyebrow on-ink">Estado de la ficha</span>
+              <div class="progress-track">
+                <div class="progress-fill"></div>
+              </div>
+              <div class="progress-label">0% completo</div>
+              <ul class="checklist">
+                <li><span class="mark"></span> Datos personales</li>
+                <li><span class="mark"></span> Lenguajes</li>
+                <li><span class="mark"></span> Enlaces de contacto</li>
+                <li><span class="mark"></span> Foto de perfil</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h3>Visibilidad</h3>
+              <div class="panel-sub">Quién puede ver tu ficha</div>
+              <div class="field">
+                <label for="d-visibilidad">Estado</label>
+                <select id="d-visibilidad">
+                  <option>Pública — visible en el directorio</option>
+                  <option>Solo con enlace directo</option>
+                  <option>Oculta</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <span>✓</span> Ficha <b>guardada correctamente</b> — los cambios se han sincronizado en tu perfil público.
+  </div>
+
+  <!-- Live Preview Modal -->
+  <div class="modal-backdrop" id="previewModal">
+    <div class="preview-modal-box">
+      <button type="button" class="modal-close-btn" id="closePreviewModal" data-tooltip="Cerrar vista previa (Esc)">✕</button>
+      <div style="font-family: var(--f-mono); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 16px;">
+        ⚡ VISTA PREVIA EN VIVO DE TU PERFIL PÚBLICO
+      </div>
+
+      <div class="profile-hero" style="border-radius: var(--radius);">
+        <div class="wrap" style="margin-top: 0;">
+          <div class="avatar-lg">
+            <span id="p-avatar-text" style="display: flex;">CR</span>
+            <img id="p-avatar-img" src="" alt="Foto" style="display: none;">
+          </div>
+          <div>
+            <h1 id="p-nombre" style="font-size: 1.6rem;">—</h1>
+            <div class="role" id="p-rol">—</div>
+          </div>
+          <div class="id">
+            <b id="p-id">EGR·2021·014</b>
+          </div>
+        </div>
+      </div>
+
+      <div style="padding: 24px 0;">
+        <div class="block">
+          <h2>Sobre mí</h2>
+          <p class="bio" id="p-bio">—</p>
+        </div>
+
+        <div class="block">
+          <h2>Proyectos Destacados</h2>
+          <div class="projects-grid" id="p-projects"></div>
+        </div>
+
+        <div class="block">
+          <h2>Experiencia y Trayectoria</h2>
+          <div class="timeline" id="p-experience"></div>
+        </div>
+
+        <div class="block">
+          <h2>Lenguajes y tecnologías</h2>
+          <div class="skill-row" id="p-skills"></div>
+        </div>
+
+        <div class="block">
+          <h2>Habilidades Blandas</h2>
+          <div class="soft-skills" id="p-soft-skills"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

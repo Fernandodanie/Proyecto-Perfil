@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Egresados — Ing. Informática UAJMS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <canvas id="bg-particles"></canvas>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span>ING.<span class="dot">·</span>INFORMÁTICA</span>
+        <small>UAJMS — Yacuiba</small>
+      </div>
+      <nav>
+        <a href="index.html" class="active" data-i18n="nav_dir" data-tooltip="Ir al listado principal">Directorio</a>
+        <a href="dashboard.html" data-i18n="nav_dash" data-tooltip="Panel de edición">Mi ficha</a>
+        <a href="login.html" data-i18n="nav_login" data-tooltip="Acceso al panel de egresados">Ingresar</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="query-line">
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> egresados <span class="kw">WHERE</span> especialidad = <span class="str">'<span id="typewriter" class="typewriter-text"></span>'</span>;
+      </div>
+      <h1 data-i18n="hero_title">Registro de <span>Egresados</span></h1>
+      <p class="lead" data-i18n="hero_lead">Directorio de profesionales formados en la carrera de Ingeniería Informática. Cada ficha reúne las competencias, proyectos destacados, trayectoria laboral y contactos de nuestros egresados.</p>
+      <div class="hero-actions">
+        <a href="login.html" class="btn btn-amber" data-i18n="btn_reg" data-tooltip="Crea o edita tu ficha profesional">Registrar mi ficha</a>
+        <a href="#directorio" class="btn btn-ghost-on-ink" data-i18n="btn_view_dir" data-tooltip="Explorar listado de egresados">Ver directorio</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>126</b><span>EGRESADOS REGISTRADOS</span></div>
+        <div class="stat"><b>18</b><span>LENGUAJES DISTINTOS</span></div>
+        <div class="stat"><b>2024</b><span>ÚLTIMA PROMOCIÓN</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="filterbar" id="directorio">
+    <div class="wrap">
+      <input type="text" id="search" placeholder="Buscar por nombre, apellido o rol…" data-i18n="search_ph">
+
+      <select id="filterLang" aria-label="Filtrar por tecnología">
+        <option value="">Todas las tecnologías</option>
+        <option value="Python">Python</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="Java">Java</option>
+        <option value="SQL">SQL</option>
+        <option value="Go">Go</option>
+        <option value="Kotlin">Kotlin</option>
+        <option value="TypeScript">TypeScript</option>
+        <option value="Docker">Docker</option>
+      </select>
+
+      <select id="filterAnio" aria-label="Filtrar por año de egreso">
+        <option value="">Todos los años</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+      </select>
+
+      <select id="sortBy" aria-label="Ordenar resultados">
+        <option value="name-asc">Ordenar: Nombre A-Z</option>
+        <option value="name-desc">Ordenar: Nombre Z-A</option>
+        <option value="year-desc">Ordenar: Más reciente</option>
+        <option value="year-asc">Ordenar: Más antiguo</option>
+        <option value="skills-desc">Ordenar: Habilidades</option>
+      </select>
+
+      <div style="display: flex; gap: 4px; margin-left: 8px;">
+        <button type="button" class="view-btn active" id="btnViewGrid" title="Vista Grilla" aria-label="Vista Grilla">田</button>
+        <button type="button" class="view-btn" id="btnViewList" title="Vista Lista" aria-label="Vista Lista">☰</button>
+      </div>
+
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <span>Carrera de Ingeniería Informática · UAJMS</span>
+      <span>Prototipo de demostración — datos simulados</span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

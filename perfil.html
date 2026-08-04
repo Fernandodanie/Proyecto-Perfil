@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de egresado — Registro de Egresados</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="profile-root">
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span>ING.<span class="dot">·</span>INFORMÁTICA</span>
+        <small>UAJMS — Yacuiba</small>
+      </div>
+      <nav>
+        <a href="index.html" data-i18n="nav_dir">Directorio</a>
+        <a href="dashboard.html" data-i18n="nav_dash">Mi ficha</a>
+        <a href="login.html" data-i18n="nav_login">Ingresar</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="profile-cover" id="p-cover"></div>
+
+  <section class="profile-hero">
+    <div class="wrap">
+      <div class="avatar-lg" id="p-avatar-container">
+        <span id="p-avatar-text" style="display: flex;">CR</span>
+        <img id="p-avatar-img" src="" alt="Foto de perfil" style="display: none;">
+      </div>
+
+      <div>
+        <h1 id="p-nombre">Cargando…</h1>
+        <div class="role" id="p-rol">—</div>
+        <div class="badge-row" id="p-badges"></div>
+      </div>
+
+      <div class="id">
+        <span>CÓDIGO DE REGISTRO</span>
+        <b id="p-id">EGR·0000·000</b>
+        <div class="profile-actions-bar">
+          <button type="button" class="btn btn-outline btn-sm" id="btnShareLink" data-tooltip="Copiar enlace directo al portapapeles">
+            🔗 Copiar enlace
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnShowQR" data-tooltip="Generar código QR de este perfil">
+            📱 Código QR
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnDownloadVCard" data-i18n="vcard_btn" data-tooltip="Guardar como contacto en tu teléfono">
+            📇 vCard (.vcf)
+          </button>
+          <button type="button" class="btn btn-outline btn-sm" id="btnPrintCV" data-tooltip="Generar vista imprimible o guardar en PDF">
+            📄 Exportar CV (PDF)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="profile-body">
+    <div class="wrap profile-grid">
+      <div>
+        <div class="block">
+          <h2>Sobre mí</h2>
+          <p class="bio" id="p-bio">—</p>
+        </div>
+
+        <div class="block">
+          <h2>Lenguajes y Tecnologías</h2>
+          <div class="skill-row" id="p-skills"></div>
+          <div id="p-skills-chart"></div>
+        </div>
+
+        <div class="block">
+          <h2>Proyectos Destacados</h2>
+          <div class="projects-grid" id="p-projects"></div>
+        </div>
+
+        <div class="block">
+          <h2>Experiencia y Trayectoria</h2>
+          <div class="timeline" id="p-experience"></div>
+        </div>
+
+        <div class="block">
+          <h2>Habilidades Blandas</h2>
+          <div class="soft-skills" id="p-soft-skills"></div>
+        </div>
+
+        <!-- Red Social: Recomendaciones -->
+        <div class="block">
+          <h2>Recomendaciones de Colegas</h2>
+          <div class="recommendations-list" id="p-recommendations"></div>
+
+          <div class="panel" style="margin-top: 24px;">
+            <h3>Dejar una recomendación</h3>
+            <form id="recForm">
+              <div class="row-2">
+                <div class="field">
+                  <label for="rec-autor">Tu nombre</label>
+                  <input type="text" id="rec-autor" placeholder="Ej. Diego Fernández" required>
+                </div>
+                <div class="field">
+                  <label for="rec-cargo">Tu cargo / relación</label>
+                  <input type="text" id="rec-cargo" placeholder="Ej. Full Stack Engineer / Colega">
+                </div>
+              </div>
+              <div class="field">
+                <label for="rec-mensaje">Mensaje de recomendación</label>
+                <textarea id="rec-mensaje" rows="3" placeholder="Escribe un testimonio sobre el trabajo de este profesional…" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Publicar recomendación</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="contact-card">
+          <span class="eyebrow">Contacto & Redes</span>
+          <a class="contact-link" id="p-correo" href="#">
+            <span class="icon">✉</span>
+            <span id="p-correo-text">—</span>
+          </a>
+          <a class="contact-link" id="p-github" href="#" target="_blank" rel="noopener">
+            <span class="icon">GH</span>
+            <span id="p-github-text">—</span>
+          </a>
+          <a class="contact-link" id="p-linkedin" href="#" target="_blank" rel="noopener">
+            <span class="icon">IN</span>
+            <span id="p-linkedin-text">—</span>
+          </a>
+          <a class="contact-link" id="p-portfolio" href="#" target="_blank" rel="noopener">
+            <span class="icon">↗</span>
+            <span id="p-portfolio-text">—</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de Código QR -->
+  <div class="modal-backdrop" id="qrModal">
+    <div class="qr-modal-box">
+      <button type="button" class="modal-close-btn" id="closeQRModal">✕</button>
+      <div class="eyebrow" style="margin-bottom: 8px;">PERFIL PROFESIONAL</div>
+      <h3 style="color: white; font-family: var(--f-display);">Código QR</h3>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">Escanea para abrir esta ficha en tu dispositivo móvil</p>
+      <canvas id="qrCanvas"></canvas>
+      <button type="button" class="btn btn-outline btn-sm btn-block" onclick="document.getElementById('qrModal').classList.remove('open')">
+        Cerrar
+      </button>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <span>Carrera de Ingeniería Informática · UAJMS</span>
+      <a href="index.html">← Volver al directorio</a>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

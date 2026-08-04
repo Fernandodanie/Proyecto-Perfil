@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingresar — Registro de Egresados</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <span>ING.<span class="dot">·</span>INFORMÁTICA</span>
+        <small>UAJMS — Yacuiba</small>
+      </div>
+      <nav>
+        <a href="index.html" data-i18n="nav_dir">Directorio</a>
+        <a href="login.html" class="active" data-i18n="nav_login">Ingresar</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="auth-shell">
+    <div class="auth-side">
+      <canvas id="bg-particles"></canvas>
+      <div style="position: relative; z-index: 2;">
+        <span class="eyebrow on-ink">EGR·MULTI·USER</span>
+        <h2 style="margin-top:14px;">Tu perfil profesional, tal como quieres mostrarlo.</h2>
+        <p>Inicia sesión con cualquier correo registrado para gestionar tu propia ficha, o crea una cuenta nueva para integrarte al directorio de egresados.</p>
+      </div>
+      <div class="record-preview" style="position: relative; z-index: 2;">
+        <div><span class="k">base_de_datos</span> <span class="v">→ localStorage (Multi-perfil)</span></div>
+        <div><span class="k">cuentas_demo</span> <span class="v">→ camila.rojas@ejemplo.com, diego.fernandez@ejemplo.com</span></div>
+        <div><span class="k">estado</span> <span class="v">→ activo (CRUD persistente)</span></div>
+      </div>
+    </div>
+
+    <div class="auth-main">
+      <div class="auth-card">
+        <h1>Bienvenido/a</h1>
+        <p class="sub">Ingresa a tu ficha o crea una nueva cuenta.</p>
+
+        <div class="tabs">
+          <button type="button" class="tab-btn active" data-target="login">Iniciar sesión</button>
+          <button type="button" class="tab-btn" data-target="registro">Crear cuenta</button>
+        </div>
+
+        <form id="authForm">
+          <div data-panel="login" style="display:block;">
+            <div class="field">
+              <label for="li-correo">Correo electrónico</label>
+              <input type="email" id="li-correo" placeholder="tucorreo@ejemplo.com" required value="camila.rojas@ejemplo.com">
+            </div>
+            <div class="field">
+              <label for="li-pass">Contraseña</label>
+              <input type="password" id="li-pass" placeholder="••••••••" required value="123456">
+            </div>
+          </div>
+
+          <div data-panel="registro" style="display:none;">
+            <div class="row-2">
+              <div class="field">
+                <label for="re-nombres">Nombres</label>
+                <input type="text" id="re-nombres" placeholder="Ej. Carlos">
+              </div>
+              <div class="field">
+                <label for="re-apellidos">Apellidos</label>
+                <input type="text" id="re-apellidos" placeholder="Ej. Méndez">
+              </div>
+            </div>
+            <div class="field">
+              <label for="re-correo">Correo electrónico</label>
+              <input type="email" id="re-correo" placeholder="tucorreo@ejemplo.com">
+            </div>
+            <div class="row-2">
+              <div class="field">
+                <label for="re-anio">Año de egreso</label>
+                <input type="text" id="re-anio" placeholder="2024">
+              </div>
+              <div class="field">
+                <label for="re-pass">Contraseña</label>
+                <input type="password" id="re-pass" placeholder="••••••••">
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" style="margin-top: 16px;">
+            Ingresar al Panel ↗
+          </button>
+        </form>
+
+        <div class="form-foot">Prototipo con CRUD real en localStorage — cualquier e-mail iniciará o creará un perfil único.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
