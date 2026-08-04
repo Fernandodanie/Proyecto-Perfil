@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Carta de Presentación</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Aviso emergente: se muestra al llegar al límite de selecciones -->
+  <div id="aviso-limite" class="aviso-emergente oculto">
+    <p>Recomendamos elegir solo lo más relevante para el puesto al que aplicas.
+       Menos es más: los reclutadores prefieren precisión sobre una lista extensa.</p>
+    <button id="cerrar-aviso" type="button">Entendido</button>
+  </div>
+
+  <!-- Banner superior con la paleta institucional (navy + rojo) -->
+  <header class="encabezado-app">
+    <div class="forma forma-1"></div>
+    <div class="forma forma-2"></div>
+    <div class="encabezado-contenido">
+      <h1>Generador de Carta de Presentación</h1>
+      <p>Completa tus datos y elige tus habilidades para armar una carta profesional y corta.</p>
+    </div>
+  </header>
+
+  <div class="contenedor">
+
+    <main class="layout">
+
+      <!-- ===================== FORMULARIO ===================== -->
+      <form id="form-carta" class="panel-formulario">
+
+        <fieldset>
+          <legend>Datos personales</legend>
+          <label>Nombre completo
+            <input type="text" id="nombre" placeholder="Ej. Ana Pérez Gómez" required>
+          </label>
+          <label>Ciudad, país
+            <input type="text" id="ciudad-pais" placeholder="Ej. Yacuiba, Bolivia">
+          </label>
+          <label>Teléfono
+            <input type="text" id="telefono" placeholder="Ej. +591 000 00000">
+          </label>
+          <label>Correo electrónico
+            <input type="email" id="correo" placeholder="Ej. ana.perez@correo.com">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Ciudad y fecha de envío</legend>
+          <label>Ciudad
+            <input type="text" id="ciudad-envio" placeholder="Ej. Yacuiba">
+          </label>
+          <label>Fecha
+            <input type="date" id="fecha">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Datos del reclutador</legend>
+          <label>Nombre del reclutador (opcional)
+            <input type="text" id="reclutador-nombre" placeholder="Ej. Ricardo Castro">
+          </label>
+          <label>Cargo del reclutador (opcional)
+            <input type="text" id="reclutador-cargo" placeholder="Ej. Jefe de RRHH">
+          </label>
+          <label>Nombre de la empresa
+            <input type="text" id="empresa-nombre" placeholder="Ej. Fibra GYM">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Puesto al que aplicas</legend>
+          <label>Puesto
+            <input type="text" id="puesto" placeholder="Ej. Desarrollador Junior">
+          </label>
+          <label>¿Dónde viste la vacante?
+            <input type="text" id="fuente-anuncio" placeholder="Ej. LinkedIn, InfoJobs, referido">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Formación académica</legend>
+          <label>Carrera
+            <input type="text" id="carrera" placeholder="Ej. Ingeniería Informática">
+          </label>
+          <label>Universidad
+            <input type="text" id="universidad" placeholder="Ej. UAJMS">
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend># Especialidad <span class="ayuda">(elige solo una)</span></legend>
+          <select id="especialidad">
+            <option value="">-- Selecciona --</option>
+            <option value="Programación">Programación</option>
+            <option value="Bases de datos">Bases de datos</option>
+            <option value="Mantenimiento">Mantenimiento</option>
+            <option value="Redes">Redes</option>
+            <option value="Multimedia">Multimedia</option>
+            <option value="Documentación">Documentación</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset-habilidades">
+          <legend>
+            Herramientas y habilidades
+            <span class="contador">Seleccionados: <span id="contador-total">0</span>/5</span>
+          </legend>
+          <div class="barra-progreso"><div id="barra-progreso-fill" class="barra-progreso-fill"></div></div>
+          <p class="ayuda">Elige máximo 2 por categoría y no más de 5 en total. Prioriza lo más relacionado con el puesto.</p>
+
+          <div class="categoria" data-categoria="lenguajes">
+            <p class="titulo-categoria"># Lenguajes</p>
+            <div class="opciones">
+              <label><input type="checkbox" value="Python"> - Python</label>
+              <label><input type="checkbox" value="JavaScript"> - JavaScript</label>
+              <label><input type="checkbox" value="Java"> - Java</label>
+              <label><input type="checkbox" value="CSS"> - CSS</label>
+              <label><input type="checkbox" value="SQL"> - SQL</label>
+              <label><input type="checkbox" value="PHP"> - PHP</label>
+            </div>
+          </div>
+
+          <div class="categoria" data-categoria="herramientas">
+            <p class="titulo-categoria"># Herramientas</p>
+            <div class="opciones">
+              <label><input type="checkbox" value="Git"> - Git</label>
+              <label><input type="checkbox" value="Docker"> - Docker</label>
+              <label><input type="checkbox" value="Visual Studio Code"> - Visual Studio Code</label>
+              <label><input type="checkbox" value="manejo de herramientas de IA"> - Manejo de herramientas de IA</label>
+            </div>
+          </div>
+
+          <div class="categoria" data-categoria="tecnologias">
+            <p class="titulo-categoria"># Tecnologías</p>
+            <div class="opciones">
+              <label><input type="checkbox" value="React"> - React</label>
+              <label><input type="checkbox" value="Node.js"> - Node.js</label>
+              <label><input type="checkbox" value="AWS"> - AWS</label>
+              <label><input type="checkbox" value="Linux"> - Linux</label>
+              <label><input type="checkbox" value="Laravel"> - Laravel</label>
+              <label><input type="checkbox" value="Django"> - Django</label>
+            </div>
+          </div>
+
+          <div class="categoria" data-categoria="blandas">
+            <p class="titulo-categoria"># Habilidades blandas</p>
+            <div class="opciones">
+              <label><input type="checkbox" value="trabajo en equipo"> - Trabajo en equipo</label>
+              <label><input type="checkbox" value="comunicación efectiva"> - Comunicación efectiva</label>
+              <label><input type="checkbox" value="resolución de problemas"> - Resolución de problemas</label>
+              <label><input type="checkbox" value="adaptabilidad"> - Adaptabilidad</label>
+              <label><input type="checkbox" value="pensamiento analítico"> - Pensamiento analítico</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Práctica, pasantía o proyecto relevante</legend>
+          <textarea id="practica" rows="2" placeholder="Ej. mi proyecto de tesis sobre..."></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>¿Qué te motiva de esta empresa?</legend>
+          <textarea id="motivacion" rows="2" placeholder="Ej. su enfoque en innovación tecnológica..."></textarea>
+        </fieldset>
+
+        <fieldset>
+          <legend>¿Qué valor puedes aportar?</legend>
+          <textarea id="valor" rows="2" placeholder="Ej. compromiso, ganas de aprender y..."></textarea>
+        </fieldset>
+
+      </form>
+
+      <!-- ===================== VISTA PREVIA ===================== -->
+      <section class="panel-vista-previa">
+        <h2>Vista previa</h2>
+        <article id="carta-preview" class="carta"></article>
+        <button id="btn-pdf" type="button" class="btn-pdf">Descargar / Imprimir PDF</button>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,369 @@
+/* =====================================================
+   Paleta institucional UAJMS: navy, rojo y blanco.
+   La carta (.carta) se mantiene siempre plana/formal:
+   estos colores y animaciones son solo para la interfaz.
+   ===================================================== */
+:root {
+  --navy: #16345c;
+  --navy-oscuro: #0f2440;
+  --rojo: #c0392b;
+  --gris-texto: #222222;
+  --gris-borde: #d8dde3;
+  --fondo-panel: #ffffff;
+  --fondo-app: #f4f6f9;
+  --fuente-carta: "Georgia", "Times New Roman", serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  color: var(--gris-texto);
+  background: var(--fondo-app);
+}
+
+/* ===== Banner superior (navy + formas rojas decorativas) ===== */
+.encabezado-app {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-oscuro) 100%);
+  color: #ffffff;
+  padding: 40px 24px;
+  text-align: center;
+  animation: fadeInDown 0.6s ease;
+}
+
+.encabezado-contenido {
+  position: relative;
+  z-index: 2;
+}
+
+.encabezado-app h1 {
+  font-size: 1.8rem;
+  margin: 0 0 6px;
+}
+
+.encabezado-app p {
+  margin: 0;
+  color: #dfe6ee;
+}
+
+/* Formas decorativas flotantes, solo estéticas */
+.forma {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.18;
+  z-index: 1;
+}
+
+.forma-1 {
+  width: 220px;
+  height: 220px;
+  background: var(--rojo);
+  top: -80px;
+  left: -60px;
+  animation: flotar 7s ease-in-out infinite;
+}
+
+.forma-2 {
+  width: 160px;
+  height: 160px;
+  background: #ffffff;
+  bottom: -70px;
+  right: -40px;
+  animation: flotar 9s ease-in-out infinite reverse;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(14px) translateX(10px); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Layout general ===== */
+.contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.panel-formulario {
+  flex: 1 1 420px;
+  min-width: 320px;
+}
+
+.panel-vista-previa {
+  flex: 1 1 420px;
+  min-width: 320px;
+  position: sticky;
+  top: 24px;
+}
+
+/* ===== Tarjetas del formulario (cada fieldset) ===== */
+fieldset {
+  border: 1px solid var(--gris-borde);
+  border-left: 4px solid var(--navy);
+  border-radius: 6px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  background: var(--fondo-panel);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  animation: fadeInUp 0.5s ease both;
+}
+
+fieldset:hover {
+  box-shadow: 0 4px 10px rgba(22, 52, 92, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Efecto escalonado al cargar la página */
+form > fieldset:nth-of-type(1) { animation-delay: 0.05s; }
+form > fieldset:nth-of-type(2) { animation-delay: 0.10s; }
+form > fieldset:nth-of-type(3) { animation-delay: 0.15s; }
+form > fieldset:nth-of-type(4) { animation-delay: 0.20s; }
+form > fieldset:nth-of-type(5) { animation-delay: 0.25s; }
+form > fieldset:nth-of-type(6) { animation-delay: 0.30s; }
+form > fieldset:nth-of-type(7) { animation-delay: 0.35s; }
+form > fieldset:nth-of-type(8) { animation-delay: 0.40s; }
+form > fieldset:nth-of-type(9) { animation-delay: 0.45s; }
+form > fieldset:nth-of-type(10) { animation-delay: 0.50s; }
+
+legend {
+  font-weight: bold;
+  padding: 0 4px;
+  color: var(--navy);
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px;
+  border: 1px solid var(--gris-borde);
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(22, 52, 92, 0.12);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.ayuda {
+  font-size: 0.8rem;
+  color: #666666;
+  font-weight: normal;
+}
+
+/* ===== Categorías de habilidades (chips seleccionables) ===== */
+.categoria {
+  margin-bottom: 14px;
+}
+
+.titulo-categoria {
+  font-weight: bold;
+  margin: 10px 0 6px;
+  color: var(--navy);
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Cada opción se ve como una "chip" en vez de un checkbox plano */
+.opciones label {
+  margin-bottom: 0;
+  font-weight: normal;
+  padding: 6px 12px;
+  border: 1px solid var(--gris-borde);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.opciones label:hover {
+  border-color: var(--navy);
+  transform: translateY(-1px);
+}
+
+.opciones input[type="checkbox"] {
+  width: auto;
+  margin-right: 4px;
+  accent-color: var(--rojo);
+}
+
+/* Chip marcada como seleccionada */
+.opciones label:has(input:checked) {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #ffffff;
+}
+
+.contador {
+  float: right;
+  font-size: 0.85rem;
+  font-weight: normal;
+  color: var(--navy);
+}
+
+.opciones input:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Barra de progreso de selección (0 a 5) */
+.barra-progreso {
+  height: 6px;
+  background: var(--gris-borde);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 6px 0 10px;
+}
+
+.barra-progreso-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--rojo);
+  transition: width 0.25s ease;
+}
+
+/* ===== Panel de vista previa ===== */
+.panel-vista-previa h2 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  color: var(--navy);
+}
+
+/* Marco de la vista previa: con color solo en el borde/encabezado,
+   el contenido de la carta permanece formal y sin color */
+.carta {
+  border: 1px solid var(--gris-borde);
+  border-top: 5px solid var(--navy);
+  background: var(--fondo-panel);
+  padding: 32px;
+  min-height: 400px;
+  font-family: var(--fuente-carta);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #000000;
+  white-space: pre-wrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.btn-pdf {
+  margin-top: 14px;
+  padding: 11px 20px;
+  background: var(--rojo);
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: bold;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-pdf:hover {
+  background: #a5311f;
+  transform: translateY(-1px);
+}
+
+/* ===== Aviso emergente ===== */
+.aviso-emergente {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-width: 320px;
+  background: #ffffff;
+  border: 1px solid var(--gris-borde);
+  border-left: 4px solid var(--rojo);
+  border-radius: 6px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  animation: fadeInUp 0.3s ease;
+}
+
+.aviso-emergente p {
+  margin: 0 0 10px;
+  font-size: 0.85rem;
+}
+
+.aviso-emergente button {
+  border: 1px solid var(--navy);
+  color: var(--navy);
+  background: transparent;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.15s ease;
+}
+
+.aviso-emergente button:hover {
+  background: var(--navy);
+  color: #ffffff;
+}
+
+.oculto {
+  display: none;
+}
+
+/* ===== Impresión: mostrar solo la carta, sin colores institucionales ===== */
+@media print {
+  .encabezado-app,
+  .panel-formulario,
+  .aviso-emergente,
+  .btn-pdf,
+  .panel-vista-previa h2 {
+    display: none;
+  }
+
+  .carta {
+    border: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
