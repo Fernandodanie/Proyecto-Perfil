@@ -149,7 +149,18 @@ form.addEventListener('change', actualizarVistaPrevia);
 
 // ----- Exportar / imprimir -----
 
+const modalImpresion = document.getElementById('modal-impresion');
+
 document.getElementById('btn-pdf').addEventListener('click', () => {
+  modalImpresion.classList.remove('oculto');
+});
+
+document.getElementById('cancelar-impresion').addEventListener('click', () => {
+  modalImpresion.classList.add('oculto');
+});
+
+document.getElementById('confirmar-impresion').addEventListener('click', () => {
+  modalImpresion.classList.add('oculto');
   window.print();
 });
 

@@ -27,6 +27,12 @@
 
   <div class="contenedor">
 
+    <!-- Fila de títulos, alineada para que ambas columnas empiecen a la misma altura -->
+    <div class="fila-titulos">
+      <h2 class="titulo-columna">Completa tus datos</h2>
+      <h2 class="titulo-columna">Vista previa</h2>
+    </div>
+
     <main class="layout">
 
       <!-- ===================== FORMULARIO ===================== -->
@@ -118,9 +124,9 @@
               <label><input type="checkbox" value="Python"> - Python</label>
               <label><input type="checkbox" value="JavaScript"> - JavaScript</label>
               <label><input type="checkbox" value="Java"> - Java</label>
-              <label><input type="checkbox" value="CSS"> - CSS</label>
-              <label><input type="checkbox" value="SQL"> - SQL</label>
               <label><input type="checkbox" value="PHP"> - PHP</label>
+              <label><input type="checkbox" value="C#"> - C#</label>
+              <label><input type="checkbox" value="SQL"> - SQL</label>
             </div>
           </div>
 
@@ -131,18 +137,25 @@
               <label><input type="checkbox" value="Docker"> - Docker</label>
               <label><input type="checkbox" value="Visual Studio Code"> - Visual Studio Code</label>
               <label><input type="checkbox" value="manejo de herramientas de IA"> - Manejo de herramientas de IA</label>
+              <label><input type="checkbox" value="Microsoft Excel"> - Microsoft Excel</label>
+              <label><input type="checkbox" value="Microsoft Word"> - Microsoft Word</label>
+              <label><input type="checkbox" value="Figma"> - Figma</label>
+              <label><input type="checkbox" value="Canva"> - Canva</label>
+              <label><input type="checkbox" value="Adobe (Photoshop/Illustrator)"> - Adobe (Photoshop/Illustrator)</label>
+              <label><input type="checkbox" value="optimizador de Windows"> - Optimizador de Windows</label>
+              <label><input type="checkbox" value="Packet Tracer"> - Packet Tracer</label>
+              <label><input type="checkbox" value="diagnóstico y mantenimiento de hardware"> - Diagnóstico y mantenimiento de hardware</label>
             </div>
           </div>
 
           <div class="categoria" data-categoria="tecnologias">
             <p class="titulo-categoria"># Tecnologías</p>
             <div class="opciones">
-              <label><input type="checkbox" value="React"> - React</label>
-              <label><input type="checkbox" value="Node.js"> - Node.js</label>
-              <label><input type="checkbox" value="AWS"> - AWS</label>
+              <label><input type="checkbox" value="MySQL"> - MySQL</label>
+              <label><input type="checkbox" value="PostgreSQL"> - PostgreSQL</label>
+              <label><input type="checkbox" value="MongoDB"> - MongoDB</label>
               <label><input type="checkbox" value="Linux"> - Linux</label>
-              <label><input type="checkbox" value="Laravel"> - Laravel</label>
-              <label><input type="checkbox" value="Django"> - Django</label>
+              <label><input type="checkbox" value="Windows Server"> - Windows Server</label>
             </div>
           </div>
 
@@ -177,12 +190,28 @@
 
       <!-- ===================== VISTA PREVIA ===================== -->
       <section class="panel-vista-previa">
-        <h2>Vista previa</h2>
         <article id="carta-preview" class="carta"></article>
-        <button id="btn-pdf" type="button" class="btn-pdf">Descargar / Imprimir PDF</button>
+        <div class="zona-boton-pdf">
+          <button id="btn-pdf" type="button" class="btn-pdf">Descargar / Imprimir PDF</button>
+        </div>
       </section>
 
     </main>
+  </div>
+
+  <!-- Modal de aviso antes de imprimir: recuerda desactivar encabezados y pies de página -->
+  <div id="modal-impresion" class="modal-overlay oculto">
+    <div class="modal-caja">
+      <h3>Antes de imprimir</h3>
+      <p>En la ventana de impresión, abre <strong>"Más ajustes"</strong> y desactiva la opción
+         <strong>"Encabezados y pies de página"</strong>. Así la carta saldrá limpia, sin la
+         fecha, el título de la página ni la URL.</p>
+      <img src="opciones.png" alt="Guía para desactivar encabezados y pies de página" class="imagen-tutorial">
+      <div class="modal-botones">
+        <button id="cancelar-impresion" type="button" class="btn-secundario">Cancelar</button>
+        <button id="confirmar-impresion" type="button" class="btn-pdf">Continuar e imprimir</button>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>

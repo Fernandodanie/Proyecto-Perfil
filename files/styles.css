@@ -92,6 +92,22 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ===== Fila de títulos (alinea ambas columnas a la misma altura) ===== */
+.fila-titulos {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.titulo-columna {
+  flex: 1 1 420px;
+  min-width: 320px;
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: var(--navy);
+}
+
 /* ===== Layout general ===== */
 .contenedor {
   max-width: 1100px;
@@ -111,11 +127,20 @@ body {
   min-width: 320px;
 }
 
+/* En pantallas de escritorio, el formulario tiene su propio scroll
+   interno y la vista previa queda siempre visible a su lado, sin
+   depender de position:sticky (que causaba problemas al imprimir). */
+@media (min-width: 860px) {
+  .panel-formulario {
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+}
+
 .panel-vista-previa {
   flex: 1 1 420px;
   min-width: 320px;
-  position: sticky;
-  top: 24px;
 }
 
 /* ===== Tarjetas del formulario (cada fieldset) ===== */
@@ -270,10 +295,8 @@ textarea {
 }
 
 /* ===== Panel de vista previa ===== */
-.panel-vista-previa h2 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  color: var(--navy);
+.zona-boton-pdf {
+  text-align: center;
 }
 
 /* Marco de la vista previa: con color solo en el borde/encabezado,
@@ -347,6 +370,67 @@ textarea {
   color: #ffffff;
 }
 
+/* ===== Modal de aviso antes de imprimir ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 36, 64, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeInUp 0.2s ease;
+}
+
+.modal-caja {
+  background: #ffffff;
+  border-radius: 8px;
+  border-top: 5px solid var(--navy);
+  max-width: 420px;
+  width: 90%;
+  padding: 22px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal-caja h3 {
+  margin-top: 0;
+  color: var(--navy);
+}
+
+.modal-caja p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.imagen-tutorial {
+  display: block;
+  max-width: 100%;
+  border: 1px solid var(--gris-borde);
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.btn-secundario {
+  padding: 10px 16px;
+  border: 1px solid var(--gris-borde);
+  background: transparent;
+  color: var(--gris-texto);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.btn-secundario:hover {
+  border-color: var(--navy);
+}
+
 .oculto {
   display: none;
 }
@@ -356,14 +440,25 @@ textarea {
   .encabezado-app,
   .panel-formulario,
   .aviso-emergente,
-  .btn-pdf,
-  .panel-vista-previa h2 {
-    display: none;
+  .modal-overlay,
+  .fila-titulos,
+  .zona-boton-pdf {
+    display: none !important;
+  }
+
+  .contenedor {
+    padding: 0;
+    max-width: none;
+  }
+
+  .layout {
+    display: block;
   }
 
   .carta {
     border: none;
     box-shadow: none;
     padding: 0;
+    min-height: auto;
   }
 }
