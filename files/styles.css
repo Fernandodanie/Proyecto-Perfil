@@ -436,6 +436,10 @@ textarea {
 }
 
 /* ===== Impresión: mostrar solo la carta, sin colores institucionales ===== */
+@page {
+  margin: 25mm;
+}
+
 @media print {
   .encabezado-app,
   .panel-formulario,
